@@ -7,13 +7,13 @@ import reactor.core.publisher.Mono;
 
 public interface IYankiService {
 
-     //Flux<Yanki> findAll();
+     Flux<Yanki> findAll();
 
-     //Mono<Yanki> save(Yanki yanki);
+     Mono<Yanki> save(Yanki yanki);
 
      Mono<Void> update(String id, Mono<YankiDto> mono);
 
-     //Mono<Void> delete(String id);
+     Mono<Void> delete(String id);
 
      Mono<YankiDto> getYanki(String id);
 

@@ -30,7 +30,7 @@ public class YankiController {
     
 
     //Metodo listar, usando response entity para manejar la respuesta del status y la respuesta del body
-    /* @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
+    @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
     @GetMapping
     public Mono<ResponseEntity<Flux<Yanki>>> getYanki(){
@@ -40,11 +40,12 @@ public class YankiController {
                 ResponseEntity.ok()
                         //mostrar en el body mediante json
                         .contentType(MediaType.APPLICATION_JSON)
+                        .body(yankiService.findAll()));
                         //mostrando en el body la respuesta);
-    } */
+    }
 
     //Metodo para eliminar
-    /* @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
+    @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
     @DeleteMapping("/{id}")
     public Mono<ResponseEntity<Void>> delete (@PathVariable String id){
@@ -52,7 +53,7 @@ public class YankiController {
         return yankiService.delete(id)
                 .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)))
                 .defaultIfEmpty(new ResponseEntity<Void>(HttpStatus.NOT_FOUND));
-    } */
+    }
 
 
     //Metodo para editar, pasamos por el requestBody el client a modificar
@@ -73,7 +74,7 @@ public class YankiController {
     }
 
     //metodo crear
-    /* @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
+    @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
     @PostMapping
     public Mono<ResponseEntity<Yanki>> create(@RequestBody Yanki yanki){
@@ -89,7 +90,7 @@ public class YankiController {
                         .contentType(MediaType.APPLICATION_JSON)
                         //Y pasamos el cliente creado
                         .body(p));
-    } */
+    }
 
     //metodo buscar por id
     @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
