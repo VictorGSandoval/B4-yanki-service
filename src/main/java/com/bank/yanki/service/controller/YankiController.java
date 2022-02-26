@@ -2,6 +2,7 @@ package com.bank.yanki.service.controller;
 
 
 import com.bank.yanki.service.model.Yanki;
+import com.bank.yanki.service.redis.YankiDto.YankiDto;
 import com.bank.yanki.service.service.IYankiService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -57,21 +58,11 @@ public class YankiController {
     @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<Yanki>> edit(@RequestBody Yanki yanki, @PathVariable String id){
+    public Mono<ResponseEntity<Void>> edit(@RequestBody Mono<YankiDto> yanki, @PathVariable String id){
         //buscamos el id para obtener el client
-        return yankiService.findById(id)
-                //A traves del flatMap actualizamos los campos para modificar
-                .flatMap(p ->{
-                    p.setIdentityDocument(yanki.getIdentityDocument());
-                    p.setPhoneNumber(yanki.getPhoneNumber());
-                    p.setAmount(yanki.getAmount());
-                    p.setEmail(yanki.getEmail());
-                    p.setImeiNumber(yanki.getImeiNumber());
-                    return yankiService.save(p);
-                })
-                //Utilizando el Map cambiamos la respuesta de Mono a un ResponseEntity
-                //mediante created pasamos la uri, y con concat concatenemos el id
-                .map(p -> ResponseEntity.created(URI.create("/yanki/".concat(p.getId())))
+        return yankiService.update(id,yanki)
+
+                .map(p -> ResponseEntity.created(URI.create("/yanki/".concat(id)))
                         //Modificamos la respeusta en el body con el contentType
                         .contentType(MediaType.APPLICATION_JSON)
                         //Y pasamos el cliente modificado
@@ -103,8 +94,8 @@ public class YankiController {
     @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
     @GetMapping("/getById/{id}")
-    public Mono<ResponseEntity<Yanki>> getById(@PathVariable String id){
-        return yankiService.findById(id)
+    public Mono<ResponseEntity<YankiDto>> getById(@PathVariable String id){
+        return yankiService.getYanki(id)
                 .map(p -> ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(p))
