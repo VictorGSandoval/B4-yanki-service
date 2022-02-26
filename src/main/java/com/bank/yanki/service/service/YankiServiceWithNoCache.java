@@ -19,7 +19,7 @@ public class YankiServiceWithNoCache implements IYankiService {
     private final YankiRepository repository;
 
 
-    @Override
+    /*@Override
     public Flux<Yanki> findAll() {
         return repository.findAll();
     }
@@ -28,6 +28,12 @@ public class YankiServiceWithNoCache implements IYankiService {
     public Mono<Yanki> save(Yanki yanki) {
         return repository.save(yanki);
     }
+
+
+    @Override
+    public Mono<Void> delete(String id) {
+        return repository.deleteById(id);
+    } */
 
     @Override
     public Mono<Void> update(String id, Mono<YankiDto> mono) {
@@ -39,10 +45,6 @@ public class YankiServiceWithNoCache implements IYankiService {
                 .then();
     }
 
-    @Override
-    public Mono<Void> delete(String id) {
-        return repository.deleteById(id);
-    }
 
     @Override
     public Mono<YankiDto> getYanki(String id) {

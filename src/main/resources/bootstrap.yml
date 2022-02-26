@@ -1,6 +1,7 @@
 server:
   port: 8093
-
+cache:
+  enabled: false
 spring:
   application:
     name: yanki-service
