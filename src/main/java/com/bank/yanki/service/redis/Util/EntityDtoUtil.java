@@ -1,7 +1,7 @@
 package com.bank.yanki.service.redis.Util;
 
 import com.bank.yanki.service.model.Yanki;
-import com.bank.yanki.service.redis.YankiDto.YankiDto;
+import com.bank.yanki.service.model.dto.YankiDto;
 
 public class EntityDtoUtil {
     public static YankiDto toDto(Yanki yanki){

@@ -1,6 +1,9 @@
-package com.bank.yanki.service.redis.YankiDto;
+package com.bank.yanki.service.model.dto;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +12,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class YankiDto {
 
@@ -18,7 +23,5 @@ public class YankiDto {
     private Double amount;
     private String email;
     private String imeiNumber;
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createDate;
-
 }

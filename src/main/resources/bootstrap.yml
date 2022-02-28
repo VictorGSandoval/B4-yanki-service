@@ -8,6 +8,15 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://admin1:admin1@dbproyect.sklmn.mongodb.net/DbProyect5?retryWrites=true&w=majority
+
+#KAFKA
+custom:
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic-name: topic-yanki
+    topic-name-yanki-account: topic-yanki-account
+    group-id: group-id
+
 #defecto (nombre de la configuracion del circuibraker)
 #sliding-window-size (tamaño de la ventana deslizante)
 #failure-rate-threshold (taza de fallas de un umbral)

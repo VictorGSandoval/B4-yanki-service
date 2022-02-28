@@ -2,7 +2,7 @@ package com.bank.yanki.service.controller;
 
 
 import com.bank.yanki.service.model.Yanki;
-import com.bank.yanki.service.redis.YankiDto.YankiDto;
+import com.bank.yanki.service.model.dto.YankiDto;
 import com.bank.yanki.service.service.IYankiService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -73,6 +73,7 @@ public class YankiController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
+    /*
     //metodo crear
     @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
@@ -90,7 +91,7 @@ public class YankiController {
                         .contentType(MediaType.APPLICATION_JSON)
                         //Y pasamos el cliente creado
                         .body(p));
-    }
+    } */
 
     //metodo buscar por id
     @CircuitBreaker(name="yanki", fallbackMethod = "fallback")

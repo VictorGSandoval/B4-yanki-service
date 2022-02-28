@@ -1,7 +1,7 @@
 package com.bank.yanki.service.service;
 
 
-import com.bank.yanki.service.redis.YankiDto.YankiDto;
+import com.bank.yanki.service.model.dto.YankiDto;
 import com.bank.yanki.service.repository.YankiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -38,9 +38,6 @@ public class YankiServiceWithRedisCache extends YankiServiceWithNoCache {
     }
 
     //Add
-    public YankiServiceWithRedisCache(YankiRepository repository) {
-        super(repository);
-    }
 
 
 }
