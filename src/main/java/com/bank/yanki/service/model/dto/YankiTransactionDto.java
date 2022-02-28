@@ -19,9 +19,9 @@ public class YankiTransactionDto {
 
     private String id;
 
-    private int originNumber;
+    private String originNumber;
 
-    private int destinationNumber;
+    private String destinationNumber;
 
     private Double amount;
 
