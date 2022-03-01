@@ -5,9 +5,15 @@ cache:
 spring:
   application:
     name: yanki-service
+  cloud:
+    config:
+      uri: http://localhost:8090
+      username: yloayza
+      password: yloayza2022
   data:
     mongodb:
-      uri: mongodb+srv://admin1:admin1@dbproyect.sklmn.mongodb.net/DbProyect5?retryWrites=true&w=majority
+      uri: mongodb+srv://admin1:admin1@dbproyect.sklmn.mongodb.net/DbYanki?retryWrites=true&w=majority
+
 
 #KAFKA
 custom:
