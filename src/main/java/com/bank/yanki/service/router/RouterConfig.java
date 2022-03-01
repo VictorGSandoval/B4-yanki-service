@@ -15,7 +15,7 @@ public class RouterConfig {
     public RouterFunction<ServerResponse> routes (YankiHandler handler) {
         return route(GET("/yankis"), handler::findAll)
                 .andRoute(GET("/yankis/{id}"), handler::findId)
-                .andRoute(GET("/yankis/{phoneNumber}"), handler::findByPhoneNumber)
+                .andRoute(GET("/yankis/phone/{phoneNumber}"), handler::findByPhoneNumber)
                 .andRoute(POST("/yankis"),handler::create)
                 .andRoute(DELETE("/yankis/{id}"), handler::deleteById);
     }
