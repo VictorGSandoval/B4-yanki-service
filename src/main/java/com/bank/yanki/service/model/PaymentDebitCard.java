@@ -11,6 +11,6 @@ public class PaymentDebitCard {
     @Id
     private String id;
     private String phoneNumber;
-    private String cardNumber;
+    private String idDebitCardNumber;
 
 }

@@ -9,6 +9,6 @@ public interface IPaymentDebitCardService
     Mono<PaymentDebitCard> save(PaymentDebitCard paymentDebitCard);
     Mono<PaymentDebitCard> getDebitAccount(PaymentDebitCard paymentDebitCard);
     Mono<PaymentDebitCard> findByPhoneNumber(String phoneNumber);
-    Mono<Debit> getDebitById(String id);
+    Mono<Debit> getDebitById(String idDebitCardNumber);
     Mono<PaymentDebitCard> getPaymentDebitCard(PaymentDebitCard paymentDebitCard);
 }

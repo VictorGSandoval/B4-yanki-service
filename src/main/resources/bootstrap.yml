@@ -14,7 +14,7 @@ custom:
   kafka:
     bootstrap-servers: localhost:9092
     topic-name: topic-yanki
-    topic-name-yanki-account: topic-yanki-account
+    topic-name-yanki: topic-yanki-service
     group-id: group-id
 
 #defecto (nombre de la configuracion del circuibraker)

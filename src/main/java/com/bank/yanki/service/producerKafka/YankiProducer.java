@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class YankiProducer {
-    @Value("${custom.kafka.topic-name-topic-yanki}")
+    @Value("${custom.kafka.topic-name-yanki}")
     private String topicName;
 
     @Autowired

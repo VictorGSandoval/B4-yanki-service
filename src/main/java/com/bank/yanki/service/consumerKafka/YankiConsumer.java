@@ -42,9 +42,9 @@ public class YankiConsumer {
 
                         Double newAmount = m.getAmount() - yankiTransactionDto.getAmount();
                         m.setAmount(newAmount);
-                        service.getYanki(m).flatMap(mObj -> service.save(mObj))
+                        service.getYankiAll(m).flatMap(mObj -> service.save(mObj))
                                 .flatMap(d -> service.findByPhoneNumber(yankiTransactionDto.getDestinationNumber()))
-                                .flatMap(md -> service.getYanki(md).flatMap(mde -> {
+                                .flatMap(md -> service.getYankiAll(md).flatMap(mde -> {
                                     mde.setAmount(mde.getAmount() + yankiTransactionDto.getAmount());
                                     return service.save(mde);
                                 })).subscribe(c -> log.info("UPDATE ALL GA"));
@@ -55,7 +55,7 @@ public class YankiConsumer {
 
                         //REVISAR SI TIENE DEBITO ASOCIADA
                         paymentDebitCardService.findByPhoneNumber(yankiTransactionDto.getOriginNumber()).flatMap(mdc -> {
-                                    log.info("getCardNumber: "+ mdc.getCardNumber());
+                                    log.info("getId: "+ mdc.getId());
                                     return paymentDebitCardService.getPaymentDebitCard(mdc);
                                 }
                         );
@@ -64,7 +64,7 @@ public class YankiConsumer {
                         yankiTransactionDto.setStatus(YankiTransactionDto.Status.REJECTED);
                     }
                     this.producer.producer(yankiTransactionDto);
-                    return service.getYanki(m);
+                    return service.getYankiAll(m);
                 }).subscribe();
     }
 

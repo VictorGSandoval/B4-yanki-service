@@ -1,8 +1,10 @@
 package com.bank.yanki.service.controller;
 
 
+import com.bank.yanki.service.model.PaymentDebitCard;
 import com.bank.yanki.service.model.Yanki;
 import com.bank.yanki.service.model.dto.YankiDto;
+import com.bank.yanki.service.service.IPaymentDebitCardService;
 import com.bank.yanki.service.service.IYankiService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -27,6 +29,8 @@ import java.util.Date;
 public class YankiController {
 
     private final IYankiService yankiService;
+
+    private final IPaymentDebitCardService debitService;
     
 
     //Metodo listar, usando response entity para manejar la respuesta del status y la respuesta del body
@@ -98,7 +102,18 @@ public class YankiController {
     @TimeLimiter(name="yanki")
     @GetMapping("/getById/{id}")
     public Mono<ResponseEntity<YankiDto>> getById(@PathVariable String id){
-        return yankiService.getYanki(id)
+        return yankiService.getByYanki(id)
+                .map(p -> ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(p))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
+    @TimeLimiter(name="yanki")
+    @GetMapping("/getPhoneNumber/{phoneNumber}")
+    public Mono<ResponseEntity<PaymentDebitCard>> getPhoneNumber(@PathVariable String phoneNumber){
+        return debitService.findByPhoneNumber(phoneNumber)
                 .map(p -> ResponseEntity.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(p))

@@ -54,7 +54,7 @@ public class YankiServiceWithNoCache implements IYankiService {
 
 
     @Override
-    public Mono<YankiDto> getYanki(String id) {
+    public Mono<YankiDto> getByYanki(String id) {
         return repository.findById(id).map(EntityDtoUtil::toDto);
     }
 
@@ -64,7 +64,7 @@ public class YankiServiceWithNoCache implements IYankiService {
     }
 
     @Override
-    public Mono<Yanki> getYanki(YankiDto yankiDto) {
+    public Mono<Yanki> getYankiAll(YankiDto yankiDto) {
         return Mono.just(objectMapper.convertValue(yankiDto, Yanki.class));
     }
 

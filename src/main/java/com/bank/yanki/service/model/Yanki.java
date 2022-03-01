@@ -24,4 +24,5 @@ public class Yanki {
     private String imeiNumber;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createDate;
+    private String idDebitCardNumber;
 }

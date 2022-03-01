@@ -15,10 +15,10 @@ public interface IYankiService {
 
      Mono<Void> delete(String id);
 
-     Mono<YankiDto> getYanki(String id);
+     Mono<YankiDto> getByYanki(String id);
 
      Mono<YankiDto> findByPhoneNumber(String phoneNumber);
-     Mono<Yanki> getYanki(YankiDto yankiDto);
+     Mono<Yanki> getYankiAll(YankiDto yankiDto);
      Mono<YankiDto> getYankiDto(Yanki yanki);
 
     

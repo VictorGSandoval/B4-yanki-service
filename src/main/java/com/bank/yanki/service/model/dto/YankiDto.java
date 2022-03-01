@@ -24,4 +24,5 @@ public class YankiDto {
     private String email;
     private String imeiNumber;
     private Date createDate;
+    private String idDebitCardNumber;
 }

@@ -32,7 +32,7 @@ public class YankiServiceWithRedisCache extends YankiServiceWithNoCache {
     }
 
     private Mono<YankiDto> getFromDatabaseAndCache(String id) {
-        return super.getYanki(id)
+        return super.getByYanki(id)
                 .flatMap(dto -> this.hashOperations.put(KEY, id, dto)
                         .thenReturn(dto));
     }

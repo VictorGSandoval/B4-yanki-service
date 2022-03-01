@@ -42,8 +42,8 @@ public class PaymentDebitCardService implements IPaymentDebitCardService{
     }
 
     @Override
-    public Mono<Debit> getDebitById(String id) {
-        return webClient.get().uri(this.uri + "/getById/{id}", id)
+    public Mono<Debit> getDebitById(String idDebitCardNumber) {
+        return webClient.get().uri(this.uri + "/getById/{idDebitCardNumber}", idDebitCardNumber)
                 .accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Debit.class);
     }
 

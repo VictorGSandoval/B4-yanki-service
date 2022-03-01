@@ -29,6 +29,8 @@ public class YankiTransactionDto {
 
     private LocalDateTime createAt;
 
+    private String idDebitCardNumber;
+
     public enum Status {
         PENDING,
         REJECTED,
