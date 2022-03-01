@@ -1,5 +1,5 @@
 server:
-  port: 8093
+  port: 8099
 cache:
   enabled: false
 spring:
