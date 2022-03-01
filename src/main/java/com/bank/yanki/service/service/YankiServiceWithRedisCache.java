@@ -1,18 +1,18 @@
 package com.bank.yanki.service.service;
 
-
+/*
 import com.bank.yanki.service.model.dto.YankiDto;
 import com.bank.yanki.service.repository.YankiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Mono;*/
 
-@Service
-@ConditionalOnProperty(name = "cache.enabled", havingValue = "true")
-public class YankiServiceWithRedisCache extends YankiServiceWithNoCache {
-    private static final String KEY = "yanki";
+//@Service
+//@ConditionalOnProperty(name = "cache.enabled", havingValue = "true")
+public class YankiServiceWithRedisCache /*extends YankiServiceWithNoCache*/ {
+   /* private static final String KEY = "yanki";
 
     @Autowired
     private ReactiveHashOperations<String, String , YankiDto> hashOperations;
@@ -37,7 +37,7 @@ public class YankiServiceWithRedisCache extends YankiServiceWithNoCache {
                         .thenReturn(dto));
     }
 
-    //Add
+    */
 
 
 }

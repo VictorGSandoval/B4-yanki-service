@@ -18,7 +18,9 @@ public interface IYankiService {
      Mono<YankiDto> getByYanki(String id);
 
      Mono<YankiDto> findByPhoneNumber(String phoneNumber);
+
      Mono<Yanki> getYankiAll(YankiDto yankiDto);
+
      Mono<YankiDto> getYankiDto(Yanki yanki);
 
     

@@ -17,7 +17,7 @@ import reactor.util.function.Tuple2;
 @RequiredArgsConstructor
 @Service
 @AllArgsConstructor
-@ConditionalOnProperty(name = "cache.enabled", havingValue = "false")
+//@ConditionalOnProperty(name = "cache.enabled", havingValue = "false")
 public class YankiServiceWithNoCache implements IYankiService {
 
     //Clorox
@@ -51,7 +51,6 @@ public class YankiServiceWithNoCache implements IYankiService {
                 .flatMap(this.repository::save)
                 .then();
     }
-
 
     @Override
     public Mono<YankiDto> getByYanki(String id) {

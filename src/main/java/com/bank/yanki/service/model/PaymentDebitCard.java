@@ -2,9 +2,11 @@ package com.bank.yanki.service.model;
 
 
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@ToString
 @Data
 @Document("PaymentDebitCard")
 public class PaymentDebitCard {

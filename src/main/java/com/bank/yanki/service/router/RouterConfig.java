@@ -13,8 +13,10 @@ public class RouterConfig {
 
     @Bean
     public RouterFunction<ServerResponse> routes (YankiHandler handler) {
-        return route(GET("/yanki"), handler::findAll)
-                .andRoute(GET("/yanki/{id}"), handler::findId)
-                .andRoute(POST("/yanki"),handler::create);
+        return route(GET("/yankis"), handler::findAll)
+                .andRoute(GET("/yankis/{id}"), handler::findId)
+                .andRoute(GET("/yankis/{phoneNumber}"), handler::findByPhoneNumber)
+                .andRoute(POST("/yankis"),handler::create)
+                .andRoute(DELETE("/yankis/{id}"), handler::deleteById);
     }
 }

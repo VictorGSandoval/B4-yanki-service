@@ -1,15 +1,13 @@
 package com.bank.yanki.service.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor
 public class Account {
     private String id;

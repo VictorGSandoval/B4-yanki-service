@@ -5,15 +5,22 @@ import com.bank.yanki.service.model.Yanki;
 import com.bank.yanki.service.model.dto.YankiDto;
 import com.bank.yanki.service.service.IPaymentDebitCardService;
 import com.bank.yanki.service.service.IYankiService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -35,11 +42,18 @@ public class YankiHandler {
     @Autowired
     private Validator validator;
 
+    @CircuitBreaker(name="yankiservice", fallbackMethod = "fallback")
+    @TimeLimiter(name="yankiservice")
+    // @Cacheable(value = "yanki")
     public Mono<ServerResponse> findAll(ServerRequest request) {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(service.findAll(), YankiDto.class);
     }
+
+    @CircuitBreaker(name="yankiservice", fallbackMethod = "fallback")
+    @TimeLimiter(name="yankiservice")
+    // @Cacheable(value = "yanki", key = "#yanki.id", unless = "#result.length()<10")
     public Mono<ServerResponse> findId(ServerRequest request) {
         String id = request.pathVariable("id");
 
@@ -51,7 +65,11 @@ public class YankiHandler {
                 .onErrorResume(throwable ->
                         ErrorResponse.buildBadResponse(throwable.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
     }
-    public Mono<ServerResponse> findByNroPhone(ServerRequest request) {
+
+    @CircuitBreaker(name="yankiservice", fallbackMethod = "fallback")
+    @TimeLimiter(name="yankiservice")
+    // @Cacheable(value = "yanki", key = "#yanki.phoneNumber", unless = "#result.length()<5")
+    public Mono<ServerResponse> findByPhoneNumber(ServerRequest request) {
         String phoneNumber = request.pathVariable("phoneNumber");
 
         return debitService.findByPhoneNumber(phoneNumber)
@@ -62,6 +80,10 @@ public class YankiHandler {
                 .onErrorResume(throwable ->
                         ErrorResponse.buildBadResponse(throwable.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
     }
+
+    @CircuitBreaker(name="yankiservice", fallbackMethod = "fallback")
+    @TimeLimiter(name="yankiservice")
+    // @CachePut(value = "yanki", key = "#yanki.id")
     public Mono<ServerResponse> create(ServerRequest request) {
         log.info("ENTRO AL CREATE");
         Mono<Yanki> yanki = request.bodyToMono(Yanki.class);
@@ -99,7 +121,19 @@ public class YankiHandler {
                         .body(fromValue(mdb)));
             }
         });
+    }
 
+    @CircuitBreaker(name="yankiservice", fallbackMethod = "fallback")
+    @TimeLimiter(name="yankiservice")
+    // @CacheEvict(value = "yanki", allEntries = true)
+    public Mono<ServerResponse> deleteById(ServerRequest request){
+        String id = request.pathVariable("id");
+        return service.delete(id).then(ServerResponse.noContent().build());
+    }
+
+    //metodo para manejar el error
+    private String fallback(HttpServerErrorException ex) {
+        return "Response 200, fallback method for error:  " + ex.getMessage();
     }
 
 

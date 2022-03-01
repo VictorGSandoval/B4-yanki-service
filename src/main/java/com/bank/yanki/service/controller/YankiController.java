@@ -21,13 +21,14 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.Date;
-
+/*
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/yanki")
+@RequestMapping("/yanki") */
 public class YankiController {
 
+    /*
     private final IYankiService yankiService;
 
     private final IPaymentDebitCardService debitService;
@@ -97,6 +98,8 @@ public class YankiController {
                         .body(p));
     } */
 
+    /*
+
     //metodo buscar por id
     @CircuitBreaker(name="yanki", fallbackMethod = "fallback")
     @TimeLimiter(name="yanki")
@@ -120,11 +123,16 @@ public class YankiController {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
+    /*
+     */
+
+/*
     //metodo para manejar el error
     private String fallback(HttpServerErrorException ex) {
         return "Response 200, fallback method for error:  " + ex.getMessage();
     }
 
+    */
 
 
 }
