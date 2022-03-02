@@ -17,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Document(collection = "Yanki")
 @ToString
-public class Yanki {
+public class Yanki implements Serializable{
     @Id
     private String id;
     private String identityDocument;
@@ -28,4 +28,6 @@ public class Yanki {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createDate;
     private String idDebitCardNumber;
+
+    private static final long serialVersionUID = 1L;
 }

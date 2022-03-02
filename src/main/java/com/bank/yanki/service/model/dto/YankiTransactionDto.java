@@ -4,6 +4,7 @@ package com.bank.yanki.service.model.dto;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
@@ -12,8 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class YankiTransactionDto {
-    private static final long serialVersionUID = 1L;
+public class YankiTransactionDto implements Serializable {
 
     private String id;
 
@@ -34,5 +34,5 @@ public class YankiTransactionDto {
         REJECTED,
         SUCCESSFUL
     }
-
+    private static final long serialVersionUID = 1L;
 }

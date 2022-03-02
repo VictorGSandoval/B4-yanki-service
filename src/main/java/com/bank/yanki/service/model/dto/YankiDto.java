@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class YankiDto {
+public class YankiDto implements Serializable{
 
     private String id;
     private String identityDocument;
@@ -26,4 +26,6 @@ public class YankiDto {
     private String imeiNumber;
     private Date createDate;
     private String idDebitCardNumber;
+
+    private static final long serialVersionUID = 1L;
 }

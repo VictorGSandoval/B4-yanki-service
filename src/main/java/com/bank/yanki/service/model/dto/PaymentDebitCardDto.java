@@ -8,14 +8,17 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
-public class PaymentDebitCardDto {
+public class PaymentDebitCardDto implements Serializable {
 
     private String id;
     private String phoneNumber;
     private String idDebitCardNumber;
 
+    private static final long serialVersionUID = 1L;
 }

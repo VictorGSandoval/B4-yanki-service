@@ -1,4 +1,4 @@
-package com.bank.yanki.service.redis.Util.config;
+package com.bank.yanki.service.config;
 
 
 import java.util.HashMap;
