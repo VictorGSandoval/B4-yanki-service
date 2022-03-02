@@ -35,25 +35,25 @@ public class YankiServiceWithNoCache implements IYankiService {
         return repository.findAll();
     }
 
-    @CachePut(cacheNames = CacheConfig.YANKI_CACHE, key = "#id", unless = "#result == null")
+    //@CachePut(cacheNames = CacheConfig.YANKI_CACHE, key = "#id", unless = "#result == null")
     @Override
     public Mono<YankiDto> save(Yanki yanki) {
         return  repository.save(yanki).flatMap(this::getYankiDto);
     }
 
-    @CacheEvict (cacheNames = CacheConfig.YANKI_CACHE, key = "#id")
+    //@CacheEvict (cacheNames = CacheConfig.YANKI_CACHE, key = "#id")
     @Override
     public Mono<Void> delete(String id) {
         return repository.deleteById(id);
     }
 
-    @Cacheable(cacheNames = CacheConfig.YANKI_CACHE, key = "#p0" , unless = "#result == null")
+    //@Cacheable(cacheNames = CacheConfig.YANKI_CACHE, key = "#p0" , unless = "#result == null")
     @Override
     public Mono<YankiDto> getByYanki(String id) {
         return repository.findById(id).map(EntityDtoUtil::toDto);
     }
 
-    @Cacheable(cacheNames = CacheConfig.YANKI_CACHE, key = "#phoneNumber" , unless = "#result == null")
+    //@Cacheable(cacheNames = CacheConfig.YANKI_CACHE, key = "#phoneNumber" , unless = "#result == null")
     @Override
     public Mono<YankiDto> findByPhoneNumber(String phoneNumber) {
         return repository.findByPhoneNumber(phoneNumber).flatMap(this::getYankiDto);

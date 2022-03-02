@@ -1,5 +1,6 @@
 package com.bank.yanki.service.redis.Util.config;
 
+import java.net.UnknownHostException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 
 @Configuration
 public class CacheConfig extends CachingConfigurerSupport{
@@ -32,5 +35,18 @@ public class CacheConfig extends CachingConfigurerSupport{
         return RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.of(time, temporalUnit));
     }
+
+    @Bean
+    public RedisTemplate<Object, Object> redisTemplate(
+            RedisConnectionFactory redisConnectionFactory)
+            throws UnknownHostException {
+        RedisTemplate<Object, Object> template = new RedisTemplate<Object, Object>();
+        template.setConnectionFactory(redisConnectionFactory);
+//		Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer();
+        template.setDefaultSerializer(serializer);
+        return template;
+    }
+
 
 }
