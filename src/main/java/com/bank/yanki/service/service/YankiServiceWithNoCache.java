@@ -47,7 +47,7 @@ public class YankiServiceWithNoCache implements IYankiService {
         return repository.deleteById(id);
     }
 
-    @Cacheable(cacheNames = CacheConfig.YANKI_CACHE, key = "#id" , unless = "#result == null")
+    @Cacheable(cacheNames = CacheConfig.YANKI_CACHE, key = "#p0" , unless = "#result == null")
     @Override
     public Mono<YankiDto> getByYanki(String id) {
         return repository.findById(id).map(EntityDtoUtil::toDto);
